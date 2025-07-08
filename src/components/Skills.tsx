@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Code, Database, Tool, Globe } from 'lucide-react';
+import { Code, Database, Wrench, Globe } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -11,7 +10,7 @@ const Skills = () => {
       color: "green"
     },
     {
-      title: "Frameworks & Libraries",
+      title: "Frameworks & Libraries", 
       icon: <Globe className="h-6 w-6" />,
       skills: ["Spring Boot", "React", "Node.js", "JDBC", "REST APIs"],
       color: "cyan"
@@ -24,7 +23,7 @@ const Skills = () => {
     },
     {
       title: "Tools & Technologies",
-      icon: <Tool className="h-6 w-6" />,
+      icon: <Wrench className="h-6 w-6" />,
       skills: ["Git", "GitHub", "IntelliJ IDEA", "VS Code", "Postman"],
       color: "cyan"
     }
