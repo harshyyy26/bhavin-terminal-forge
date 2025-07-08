@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { GraduationCap, Code, Database, Server, BookOpen, Target } from 'lucide-react';
+import { GraduationCap, Code, Database, Server, BookOpen, Target, Terminal } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -49,110 +49,131 @@ const About = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="section-padding bg-card/30">
+    <section ref={sectionRef} id="about" className="section-padding terminal-bg">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">01.</span> About Me
-          </h2>
+          <div className="inline-flex items-center space-x-3 mb-6">
+            <Terminal className="h-8 w-8 text-primary" />
+            <h2 className="text-4xl font-bold terminal-text">
+              <span className="text-secondary">01.</span> ./about.sh
+            </h2>
+          </div>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Content */}
           <div ref={contentRef} className="space-y-6">
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-semibold mb-4 text-primary">Background</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                I'm a passionate Computer Engineering student at MIT Academy of Engineering (AOE), Pune, 
-                currently in my final year (2022-2026). My journey in software development is driven by 
-                a deep fascination with backend systems, scalable architecture, and innovative problem-solving.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                With hands-on experience in Java development, full-stack web technologies, and database management, 
-                I've built enterprise-level software solutions including safety management systems for industrial 
-                applications and user-friendly utilities for everyday problems.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                I believe in writing clean, efficient code and building solutions that make a real impact. 
-                My goal is to contribute to meaningful projects that solve complex challenges while continuously 
-                learning and growing as a developer.
-              </p>
+            <div className="code-block">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-secondary">></span>
+                <span className="text-primary">cat background.txt</span>
+              </div>
+              <div className="text-muted-foreground leading-relaxed space-y-4">
+                <p>
+                  Computer Engineering student at MIT Academy of Engineering (AOE), Pune. 
+                  Passionate about backend systems, enterprise software development, and building 
+                  scalable solutions that solve real-world problems.
+                </p>
+                <p>
+                  Specialized in Java development with hands-on experience in Spring Boot, 
+                  database management, and full-stack web technologies. Built enterprise-level 
+                  software including safety management systems for industrial applications.
+                </p>
+                <p>
+                  Committed to writing clean, efficient code and continuously learning new 
+                  technologies to stay ahead in the rapidly evolving tech landscape.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-semibold mb-4 text-primary">Core Interests</h3>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>Backend Development & System Architecture</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>Full-Stack Web Applications with Java & React</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>Database Design & Optimization (MySQL, MongoDB)</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>REST API Development & Microservices</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>Enterprise Software Solutions</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <span className="text-primary">▶</span>
-                  <span>Open Source Contributions & Collaborative Development</span>
-                </li>
-              </ul>
+            <div className="code-block">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-secondary">></span>
+                <span className="text-primary">ls -la interests/</span>
+              </div>
+              <div className="space-y-3">
+                {[
+                  'Backend Development & System Architecture',
+                  'Enterprise Java Applications with Spring Boot',
+                  'Database Design & Optimization (MySQL, MongoDB)',
+                  'RESTful API Development & Microservices',
+                  'Full-Stack Web Development with React',
+                  'Open Source Contributions & Collaborative Development'
+                ].map((interest, index) => (
+                  <div key={index} className="flex items-center space-x-3 text-muted-foreground">
+                    <span className="text-primary">drwxr-xr-x</span>
+                    <span>{interest}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div ref={statsRef} className="grid grid-cols-2 gap-6">
-            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
-              <GraduationCap className="h-8 w-8 text-primary mx-auto mb-4" />
-              <div className="text-3xl font-bold mb-2">2026</div>
-              <div className="text-sm text-muted-foreground">Expected Graduation</div>
-              <div className="text-xs text-muted-foreground mt-1">B.Tech Computer Engineering</div>
+          <div ref={statsRef} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
+                <GraduationCap className="h-8 w-8 text-primary mx-auto mb-4" />
+                <div className="text-3xl font-bold terminal-text">2026</div>
+                <div className="text-sm text-muted-foreground">Expected Graduation</div>
+              </div>
+              
+              <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
+                <Code className="h-8 w-8 text-secondary mx-auto mb-4" />
+                <div className="text-3xl font-bold terminal-text">5+</div>
+                <div className="text-sm text-muted-foreground">Projects Completed</div>
+              </div>
+              
+              <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
+                <Database className="h-8 w-8 text-primary mx-auto mb-4" />
+                <div className="text-3xl font-bold terminal-text">3+</div>
+                <div className="text-sm text-muted-foreground">Database Technologies</div>
+              </div>
+              
+              <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
+                <Server className="h-8 w-8 text-secondary mx-auto mb-4" />
+                <div className="text-3xl font-bold terminal-text">8+</div>
+                <div className="text-sm text-muted-foreground">Tech Stack Mastery</div>
+              </div>
             </div>
-            
-            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
-              <Code className="h-8 w-8 text-secondary mx-auto mb-4" />
-              <div className="text-3xl font-bold mb-2">5+</div>
-              <div className="text-sm text-muted-foreground">Projects Completed</div>
-              <div className="text-xs text-muted-foreground mt-1">Enterprise & Personal</div>
-            </div>
-            
-            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
-              <Database className="h-8 w-8 text-primary mx-auto mb-4" />
-              <div className="text-3xl font-bold mb-2">3+</div>
-              <div className="text-sm text-muted-foreground">Database Technologies</div>
-              <div className="text-xs text-muted-foreground mt-1">MySQL, MongoDB, Firebase</div>
-            </div>
-            
-            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
-              <Server className="h-8 w-8 text-secondary mx-auto mb-4" />
-              <div className="text-3xl font-bold mb-2">8+</div>
-              <div className="text-sm text-muted-foreground">Technologies Mastered</div>
-              <div className="text-xs text-muted-foreground mt-1">Languages, Frameworks & Tools</div>
-            </div>
-          </div>
-        </div>
 
-        {/* Education Section */}
-        <div className="mt-16">
-          <div className="bg-card rounded-xl p-8 border border-border">
-            <h3 className="text-2xl font-semibold mb-6 gradient-text text-center">Education</h3>
-            <div className="flex items-center justify-center space-x-6">
-              <div className="text-center">
-                <BookOpen className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h4 className="text-xl font-semibold mb-2">MIT Academy of Engineering</h4>
-                <p className="text-muted-foreground mb-1">B.Tech in Computer Engineering</p>
-                <p className="text-sm text-muted-foreground">2022 - 2026 | Pune, Maharashtra</p>
+            {/* Education */}
+            <div className="code-block">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-secondary">></span>
+                <span className="text-primary">cat education.json</span>
+              </div>
+              <div className="space-y-2 text-sm">
+                <div><span className="text-secondary">{`{`}</span></div>
+                <div className="pl-4">
+                  <span className="text-primary">"institution"</span>: 
+                  <span className="text-foreground"> "MIT Academy of Engineering"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className="text-primary">"degree"</span>: 
+                  <span className="text-foreground"> "B.Tech Computer Engineering"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className="text-primary">"duration"</span>: 
+                  <span className="text-foreground"> "2022 - 2026"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className="text-primary">"location"</span>: 
+                  <span className="text-foreground"> "Pune, Maharashtra"</span>
+                </div>
+                <div><span className="text-secondary">{`}`}</span></div>
+              </div>
+            </div>
+
+            {/* Status */}
+            <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <span className="font-medium text-primary terminal-text">SYSTEM STATUS</span>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Available for internship opportunities and collaborative projects
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Github, ExternalLink, Shield, Code, Zap, Building, Lock, BarChart3 } from 'lucide-react';
+import { Github, ExternalLink, Shield, Code, Zap, Building, Lock, BarChart3, Terminal, Folder } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -13,40 +13,40 @@ const Projects = () => {
   const projects = [
     {
       title: "Coal Mine Safety & Productivity Management System",
-      description: "Comprehensive enterprise software solution designed for coal mining operations, featuring real-time safety monitoring, productivity tracking, and advanced analytics dashboard. Built with Java Spring Boot backend and includes modules for equipment monitoring, worker safety protocols, and operational efficiency metrics.",
-      fullDescription: "A robust enterprise application that revolutionizes coal mine operations through digital transformation. Features include real-time safety alerts, equipment tracking, worker attendance management, production analytics, and compliance reporting.",
+      description: "Enterprise software solution for coal mining operations with real-time safety monitoring, productivity tracking, and advanced analytics dashboard.",
       tech: ["Java", "Spring Boot", "MySQL", "REST APIs", "JDBC", "Enterprise Architecture"],
       icon: <Shield className="h-6 w-6" />,
       color: "primary",
       featured: true,
-      category: "Enterprise Software"
+      category: "Enterprise Software",
+      status: "Production Ready"
     },
     {
       title: "Passure - Secure Password Manager",
-      description: "Advanced Java-based password management application with military-grade encryption, secure local storage, and intuitive user interface. Features master password protection, auto-generation of strong passwords, and secure data backup capabilities.",
-      fullDescription: "A comprehensive security solution built in Java that helps users manage their digital credentials safely. Implements AES encryption, secure password generation algorithms, and provides a clean Java Swing interface.",
+      description: "Advanced Java-based password management application with military-grade AES encryption and secure local storage.",
       tech: ["Java", "AES Encryption", "Java Swing", "File I/O", "Security Protocols"],
       icon: <Lock className="h-6 w-6" />,
       color: "secondary",
-      category: "Security Application"
+      category: "Security Application",
+      status: "Stable Release"
     },
     {
       title: "WattTrack - Smart Electricity Monitor",
-      description: "Intelligent electricity consumption tracking application built with Java Swing. Features real-time usage monitoring, bill calculation, consumption analytics, and energy-saving recommendations with detailed reporting capabilities.",
-      fullDescription: "A desktop utility that helps users monitor and optimize their electricity consumption. Includes usage pattern analysis, cost calculations, peak hour detection, and energy efficiency suggestions.",
+      description: "Intelligent electricity consumption tracking with real-time monitoring, bill calculation, and energy-saving recommendations.",
       tech: ["Java Swing", "Data Analytics", "Chart Libraries", "GUI Design", "File Management"],
       icon: <Zap className="h-6 w-6" />,
       color: "primary",
-      category: "Utility Application"
+      category: "Utility Application",
+      status: "Active Development"
     },
     {
       title: "Rukmini Enterprises - Business Website",
-      description: "Professional responsive business website featuring modern design principles, comprehensive company information, service portfolios, and contact management. Built with React.js and modern web technologies for optimal performance.",
-      fullDescription: "A complete business web presence solution with responsive design, interactive components, service showcases, and integrated contact forms. Optimized for performance and SEO.",
+      description: "Professional responsive business website with modern design, service portfolios, and contact management.",
       tech: ["React.js", "JavaScript", "CSS3", "Responsive Design", "Modern Web APIs"],
       icon: <Building className="h-6 w-6" />,
       color: "secondary",
-      category: "Web Development"
+      category: "Web Development",
+      status: "Live & Maintained"
     }
   ];
 
@@ -55,7 +55,6 @@ const Projects = () => {
     const projectsGrid = projectsRef.current;
 
     if (section && projectsGrid) {
-      // Animate project cards with stagger
       gsap.from(projectsGrid.children, {
         opacity: 0,
         y: 80,
@@ -74,151 +73,180 @@ const Projects = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="section-padding bg-card/30">
+    <section ref={sectionRef} id="projects" className="section-padding terminal-bg">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">03.</span> Featured Projects
-          </h2>
+          <div className="inline-flex items-center space-x-3 mb-6">
+            <Folder className="h-8 w-8 text-primary" />
+            <h2 className="text-4xl font-bold terminal-text">
+              <span className="text-secondary">03.</span> git log --projects
+            </h2>
+          </div>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-          <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
-            A comprehensive showcase of my development journey, from enterprise-level software solutions to innovative personal utilities
-          </p>
+          <div className="code-block max-w-3xl mx-auto">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="text-secondary">></span>
+              <span className="text-primary">find ./projects -type f -name "*.md" | head -4</span>
+            </div>
+            <p className="text-muted-foreground">
+              Enterprise-level software solutions and innovative personal utilities
+            </p>
+          </div>
         </div>
 
         <div ref={projectsRef} className="space-y-8">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`bg-card rounded-xl p-8 border border-border card-hover ${
-                project.featured ? 'lg:p-12' : ''
-              }`}
+              className="bg-card border border-border rounded-lg card-hover cyber-glow overflow-hidden"
             >
-              <div className="grid lg:grid-cols-3 gap-8 items-start">
-                {/* Project Info */}
-                <div className="lg:col-span-2 space-y-6">
-                  <div>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg`}>
-                        {project.icon}
+              <div className="p-8">
+                <div className="grid lg:grid-cols-3 gap-8 items-start">
+                  {/* Project Info */}
+                  <div className="lg:col-span-2 space-y-6">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-3">
+                          <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg border border-${project.color}/20`}>
+                            {project.icon}
+                          </div>
+                          <div>
+                            <div className="flex items-center space-x-3">
+                              <span className="text-xs text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
+                                {project.category}
+                              </span>
+                              <span className={`text-xs font-mono px-2 py-1 rounded ${
+                                project.status.includes('Production') || project.status.includes('Live') 
+                                  ? 'bg-primary/20 text-primary' 
+                                  : 'bg-secondary/20 text-secondary'
+                              }`}>
+                                {project.status}
+                              </span>
+                            </div>
+                            <h3 className="text-2xl font-bold terminal-text mt-2">{project.title}</h3>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-sm text-muted-foreground font-medium">{project.category}</span>
-                        <h3 className="text-2xl font-bold">{project.title}</h3>
-                      </div>
+
+                      <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
+                        {project.description}
+                      </p>
+
+                      {project.featured && (
+                        <div className="code-block mb-6">
+                          <div className="flex items-center space-x-2 mb-3">
+                            <span className="text-secondary">></span>
+                            <span className="text-primary">cat features.txt</span>
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {index === 0 && "Comprehensive enterprise application with real-time safety alerts, equipment tracking, worker management, production analytics, and compliance reporting for coal mining operations."}
+                            {index === 1 && "Military-grade security solution with AES encryption, secure password generation algorithms, and clean Java Swing interface for credential management."}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-lg">
-                      {project.description}
-                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="skill-badge text-xs terminal-text"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                    {project.featured && (
-                      <div className="bg-muted/30 rounded-lg p-4 mb-4">
-                        <h4 className="font-semibold mb-2 text-primary">Key Features & Impact:</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {project.fullDescription}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="skill-badge text-sm"
+                    <div className="flex space-x-4">
+                      <a
+                        href="https://github.com/Bhavin-0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cyber-glow"
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        <Github className="h-4 w-4" />
+                        <span>source code</span>
+                      </a>
+                      <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300">
+                        <ExternalLink className="h-4 w-4" />
+                        <span>demo</span>
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="flex space-x-4">
-                    <a
-                      href="https://github.com/Bhavin-0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
-                    >
-                      <Github className="h-4 w-4" />
-                      <span>View Code</span>
-                    </a>
-                    <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300">
-                      <ExternalLink className="h-4 w-4" />
-                      <span>Live Demo</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Project Stats/Highlights */}
-                <div className="space-y-4">
-                  <div className="bg-muted/20 rounded-lg p-6">
-                    <h4 className="font-semibold mb-4 gradient-text">Project Highlights</h4>
-                    <div className="space-y-3">
-                      {index === 0 && (
-                        <>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Scale</span>
-                            <span className="text-sm font-medium">Enterprise</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Industry</span>
-                            <span className="text-sm font-medium">Mining</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Users</span>
-                            <span className="text-sm font-medium">100+ Workers</span>
-                          </div>
-                        </>
-                      )}
-                      {index === 1 && (
-                        <>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Security</span>
-                            <span className="text-sm font-medium">AES Encryption</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Platform</span>
-                            <span className="text-sm font-medium">Desktop</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Type</span>
-                            <span className="text-sm font-medium">Security Tool</span>
-                          </div>
-                        </>
-                      )}
-                      {index === 2 && (
-                        <>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Domain</span>
-                            <span className="text-sm font-medium">Energy</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Interface</span>
-                            <span className="text-sm font-medium">Java Swing</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Analytics</span>
-                            <span className="text-sm font-medium">Real-time</span>
-                          </div>
-                        </>
-                      )}
-                      {index === 3 && (
-                        <>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Type</span>
-                            <span className="text-sm font-medium">Business Site</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Framework</span>
-                            <span className="text-sm font-medium">React.js</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Design</span>
-                            <span className="text-sm font-medium">Responsive</span>
-                          </div>
-                        </>
-                      )}
+                  {/* Project Stats */}
+                  <div className="space-y-4">
+                    <div className="code-block">
+                      <div className="flex items-center space-x-2 mb-4">
+                        <span className="text-secondary">></span>
+                        <span className="text-primary">./project_info.sh</span>
+                      </div>
+                      <div className="space-y-3 text-sm">
+                        {index === 0 && (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">scale:</span>
+                              <span className="terminal-text">enterprise</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">industry:</span>
+                              <span className="terminal-text">mining</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">users:</span>
+                              <span className="terminal-text">100+</span>
+                            </div>
+                          </>
+                        )}
+                        {index === 1 && (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">security:</span>
+                              <span className="terminal-text">aes-256</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">platform:</span>
+                              <span className="terminal-text">desktop</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">type:</span>
+                              <span className="terminal-text">security</span>
+                            </div>
+                          </>
+                        )}
+                        {index === 2 && (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">domain:</span>
+                              <span className="terminal-text">energy</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">interface:</span>
+                              <span className="terminal-text">swing</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">analytics:</span>
+                              <span className="terminal-text">real-time</span>
+                            </div>
+                          </>
+                        )}
+                        {index === 3 && (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">type:</span>
+                              <span className="terminal-text">business</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">framework:</span>
+                              <span className="terminal-text">react</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">design:</span>
+                              <span className="terminal-text">responsive</span>
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -229,31 +257,35 @@ const Projects = () => {
 
         {/* GitHub Section */}
         <div className="mt-16 text-center">
-          <div className="bg-card rounded-xl p-8 border border-border">
+          <div className="code-block max-w-4xl mx-auto">
             <div className="flex items-center justify-center space-x-4 mb-6">
               <BarChart3 className="h-8 w-8 text-primary" />
-              <h3 className="text-2xl font-semibold gradient-text">
-                Explore My Complete Portfolio
+              <h3 className="text-2xl font-semibold terminal-text">
+                explore complete portfolio
               </h3>
             </div>
+            <div className="flex items-center space-x-2 mb-4 justify-center">
+              <span className="text-secondary">></span>
+              <span className="text-primary">git remote -v</span>
+            </div>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Visit my GitHub profile to explore additional projects, contributions to open source, 
-              code samples, and ongoing development work. See the full scope of my technical journey.
+              Visit my GitHub profile for additional projects, open source contributions, 
+              and ongoing development work.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://github.com/Bhavin-0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 bg-primary/10 border border-primary rounded-lg px-8 py-4 hover:bg-primary/20 transition-all duration-300 card-hover"
+                className="inline-flex items-center space-x-3 bg-primary/10 border border-primary rounded-lg px-8 py-4 hover:bg-primary/20 transition-all duration-300 card-hover cyber-glow terminal-text"
               >
                 <Github className="h-6 w-6" />
-                <span className="font-medium">Visit My GitHub</span>
+                <span className="font-medium">github.com/Bhavin-0</span>
                 <ExternalLink className="h-4 w-4" />
               </a>
-              <div className="inline-flex items-center space-x-3 bg-secondary/10 border border-secondary/30 rounded-lg px-8 py-4">
+              <div className="inline-flex items-center space-x-3 bg-secondary/10 border border-secondary/30 rounded-lg px-8 py-4 terminal-text">
                 <Code className="h-6 w-6 text-secondary" />
-                <span className="font-medium">20+ Repositories</span>
+                <span className="font-medium">20+ repositories</span>
               </div>
             </div>
           </div>

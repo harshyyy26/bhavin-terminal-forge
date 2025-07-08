@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code } from 'lucide-react';
+import { Terminal, Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', label: 'home', command: 'cd ~' },
+    { id: 'about', label: 'about', command: 'cat about.txt' },
+    { id: 'skills', label: 'skills', command: 'ls skills/' },
+    { id: 'projects', label: 'projects', command: 'git log --oneline' },
+    { id: 'contact', label: 'contact', command: 'mail -s' }
   ];
 
   useEffect(() => {
@@ -44,64 +44,64 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Code className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold gradient-text">BJ.dev</span>
-          </div>
+    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 floating-nav rounded-full px-6 py-3">
+      <div className="flex items-center space-x-8">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <Terminal className="h-6 w-6 text-primary" />
+          <span className="text-lg font-bold terminal-text">bhavin@dev:~$</span>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-6">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`text-sm font-medium transition-all duration-300 hover:text-primary relative group ${
+                activeSection === item.id
+                  ? 'text-primary neon-text'
+                  : 'text-muted-foreground'
+              }`}
+              title={item.command}
+            >
+              ./{item.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-card/95 backdrop-blur-lg border border-border rounded-lg">
+          <div className="px-4 py-3 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-all duration-300 ${
+                className={`block w-full text-left px-3 py-2 text-sm font-medium transition-all duration-300 rounded ${
                   activeSection === item.id
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'text-primary bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
-                {item.label}
+                {item.command}
               </button>
             ))}
           </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-card/95 backdrop-blur-lg border-b border-border">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
-                    activeSection === item.id
-                      ? 'text-primary bg-primary/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </nav>
   );
 };
