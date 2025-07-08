@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Github, ExternalLink, Shield, Code, Zap, Building, Lock, BarChart3, Terminal, Folder } from 'lucide-react';
+import { Github, ExternalLink, Shield, Lock, Zap, Building, Terminal, Folder, Play, Eye } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,40 +12,83 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 1,
       title: "Coal Mine Safety & Productivity Management System",
-      description: "Enterprise software solution for coal mining operations with real-time safety monitoring, productivity tracking, and advanced analytics dashboard.",
-      tech: ["Java", "Spring Boot", "MySQL", "REST APIs", "JDBC", "Enterprise Architecture"],
-      icon: <Shield className="h-6 w-6" />,
+      description: "A comprehensive full-stack platform for real-time coal mine incident tracking and performance monitoring. Features include safety alerts, equipment tracking, worker management, and detailed analytics dashboard.",
+      shortDesc: "Enterprise safety management system for coal mining operations",
+      tech: ["Java", "Spring Boot", "React", "Node.js", "MongoDB", "REST APIs"],
+      icon: <Shield className="h-8 w-8" />,
       color: "primary",
-      featured: true,
       category: "Enterprise Software",
+      features: [
+        "Real-time incident tracking",
+        "Safety alert system",
+        "Equipment monitoring",
+        "Performance analytics",
+        "Worker management"
+      ],
+      github: "https://github.com/Bhavin-0",
+      demo: "#",
       status: "Production Ready"
     },
     {
+      id: 2,
       title: "Passure - Secure Password Manager",
-      description: "Advanced Java-based password management application with military-grade AES encryption and secure local storage.",
-      tech: ["Java", "AES Encryption", "Java Swing", "File I/O", "Security Protocols"],
-      icon: <Lock className="h-6 w-6" />,
+      description: "A robust Java-based desktop application for password management with military-grade AES encryption, secure password generation algorithms, and clean Java Swing interface for credential management.",
+      shortDesc: "Secure desktop password manager with AES encryption",
+      tech: ["Java", "Java Swing", "AES Encryption", "JDBC", "SQL", "Security"],
+      icon: <Lock className="h-8 w-8" />,
       color: "secondary",
       category: "Security Application",
+      features: [
+        "AES-256 encryption",
+        "Password generation",
+        "Local storage with JDBC",
+        "Strength validation",
+        "Secure authentication"
+      ],
+      github: "https://github.com/Bhavin-0",
+      demo: "#",
       status: "Stable Release"
     },
     {
-      title: "WattTrack - Smart Electricity Monitor",
-      description: "Intelligent electricity consumption tracking with real-time monitoring, bill calculation, and energy-saving recommendations.",
-      tech: ["Java Swing", "Data Analytics", "Chart Libraries", "GUI Design", "File Management"],
-      icon: <Zap className="h-6 w-6" />,
+      id: 3,
+      title: "WattTrack - Electricity Usage Tracker",
+      description: "Java Swing application designed to visualize electricity consumption patterns with automatic billing system, usage analytics, and energy-saving recommendations.",
+      shortDesc: "Smart electricity consumption tracking and billing system",
+      tech: ["Java Swing", "JDBC", "MySQL", "Chart Libraries", "Data Analytics"],
+      icon: <Zap className="h-8 w-8" />,
       color: "primary",
       category: "Utility Application",
+      features: [
+        "Usage visualization",
+        "Automatic billing",
+        "Energy analytics",
+        "Cost optimization",
+        "Historical tracking"
+      ],
+      github: "https://github.com/Bhavin-0",
+      demo: "#",
       status: "Active Development"
     },
     {
-      title: "Rukmini Enterprises - Business Website",
-      description: "Professional responsive business website with modern design, service portfolios, and contact management.",
-      tech: ["React.js", "JavaScript", "CSS3", "Responsive Design", "Modern Web APIs"],
-      icon: <Building className="h-6 w-6" />,
+      id: 4,
+      title: "Rukmini Enterprises Website",
+      description: "Modern, responsive business website for a welding electrode manufacturing company. Built with React and Firebase, featuring product listings, company information, and contact management system.",
+      shortDesc: "Professional business website with product management",
+      tech: ["React", "Firebase", "JavaScript", "CSS3", "Responsive Design"],
+      icon: <Building className="h-8 w-8" />,
       color: "secondary",
       category: "Web Development",
+      features: [
+        "Product showcase",
+        "Contact management",
+        "Responsive design",
+        "Firebase integration",
+        "SEO optimized"
+      ],
+      github: "https://github.com/Bhavin-0",
+      demo: "#",
       status: "Live & Maintained"
     }
   ];
@@ -58,7 +101,7 @@ const Projects = () => {
       gsap.from(projectsGrid.children, {
         opacity: 0,
         y: 80,
-        scale: 0.8,
+        scale: 0.9,
         duration: 0.8,
         stagger: 0.2,
         ease: "power3.out",
@@ -89,163 +132,118 @@ const Projects = () => {
               <span className="text-primary">find ./projects -type f -name "*.md" | head -4</span>
             </div>
             <p className="text-muted-foreground">
-              Enterprise-level software solutions and innovative personal utilities
+              Showcasing enterprise-level software solutions and innovative applications
             </p>
           </div>
         </div>
 
-        <div ref={projectsRef} className="space-y-8">
+        <div ref={projectsRef} className="space-y-12">
           {projects.map((project, index) => (
             <div
-              key={project.title}
-              className="bg-card border border-border rounded-lg card-hover cyber-glow overflow-hidden"
+              key={project.id}
+              className="project-card group"
             >
-              <div className="p-8">
-                <div className="grid lg:grid-cols-3 gap-8 items-start">
-                  {/* Project Info */}
-                  <div className="lg:col-span-2 space-y-6">
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg border border-${project.color}/20`}>
-                            {project.icon}
-                          </div>
-                          <div>
-                            <div className="flex items-center space-x-3">
-                              <span className="text-xs text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
-                                {project.category}
-                              </span>
-                              <span className={`text-xs font-mono px-2 py-1 rounded ${
-                                project.status.includes('Production') || project.status.includes('Live') 
-                                  ? 'bg-primary/20 text-primary' 
-                                  : 'bg-secondary/20 text-secondary'
-                              }`}>
-                                {project.status}
-                              </span>
-                            </div>
-                            <h3 className="text-2xl font-bold terminal-text mt-2">{project.title}</h3>
-                          </div>
-                        </div>
+              <div className="grid lg:grid-cols-12 gap-8 items-start">
+                {/* Project Header */}
+                <div className="lg:col-span-12 mb-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-4">
+                      <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg border border-${project.color}/20`}>
+                        {project.icon}
                       </div>
-
-                      <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
-                        {project.description}
-                      </p>
-
-                      {project.featured && (
-                        <div className="code-block mb-6">
-                          <div className="flex items-center space-x-2 mb-3">
-                            <span className="text-secondary">{'>'}</span>
-                            <span className="text-primary">cat features.txt</span>
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            {index === 0 && "Comprehensive enterprise application with real-time safety alerts, equipment tracking, worker management, production analytics, and compliance reporting for coal mining operations."}
-                            {index === 1 && "Military-grade security solution with AES encryption, secure password generation algorithms, and clean Java Swing interface for credential management."}
-                          </div>
+                      <div>
+                        <div className="flex items-center space-x-3 mb-2">
+                          <span className="text-xs text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
+                            {project.category}
+                          </span>
+                          <span className={`text-xs font-mono px-2 py-1 rounded ${
+                            project.status.includes('Production') || project.status.includes('Live') 
+                              ? 'bg-primary/20 text-primary border border-primary/30' 
+                              : 'bg-secondary/20 text-secondary border border-secondary/30'
+                          }`}>
+                            {project.status}
+                          </span>
                         </div>
-                      )}
+                        <h3 className="text-2xl font-bold terminal-text group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                      </div>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="skill-badge text-xs terminal-text"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                {/* Project Info */}
+                <div className="lg:col-span-8 space-y-6">
+                  <div>
+                    <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                      {project.description}
+                    </p>
+                    
+                    <div className="code-block">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <span className="text-secondary">{'>'}</span>
+                        <span className="text-primary">cat features.txt</span>
+                      </div>
+                      <div className="space-y-2">
+                        {project.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 text-sm text-muted-foreground">
+                            <span className="text-primary">•</span>
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                  </div>
 
-                    <div className="flex space-x-4">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="skill-badge text-xs terminal-text"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Project Actions */}
+                <div className="lg:col-span-4 space-y-4">
+                  <div className="code-block">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <span className="text-secondary">{'>'}</span>
+                      <span className="text-primary">./deploy.sh</span>
+                    </div>
+                    <div className="space-y-3">
                       <a
-                        href="https://github.com/Bhavin-0"
+                        href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cyber-glow"
+                        className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cyber-glow w-full"
                       >
                         <Github className="h-4 w-4" />
-                        <span>source code</span>
+                        <span>View Source</span>
                       </a>
-                      <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-6 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300">
-                        <ExternalLink className="h-4 w-4" />
-                        <span>demo</span>
+                      <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300 w-full">
+                        <Play className="h-4 w-4" />
+                        <span>Live Demo</span>
                       </button>
                     </div>
                   </div>
 
-                  {/* Project Stats */}
-                  <div className="space-y-4">
-                    <div className="code-block">
-                      <div className="flex items-center space-x-2 mb-4">
-                        <span className="text-secondary">{'>'}</span>
-                        <span className="text-primary">./project_info.sh</span>
+                  <div className="bg-muted/50 border border-border rounded-lg p-4">
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Type:</span>
+                        <span className="terminal-text">{project.category.toLowerCase()}</span>
                       </div>
-                      <div className="space-y-3 text-sm">
-                        {index === 0 && (
-                          <>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">scale:</span>
-                              <span className="terminal-text">enterprise</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">industry:</span>
-                              <span className="terminal-text">mining</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">users:</span>
-                              <span className="terminal-text">100+</span>
-                            </div>
-                          </>
-                        )}
-                        {index === 1 && (
-                          <>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">security:</span>
-                              <span className="terminal-text">aes-256</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">platform:</span>
-                              <span className="terminal-text">desktop</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">type:</span>
-                              <span className="terminal-text">security</span>
-                            </div>
-                          </>
-                        )}
-                        {index === 2 && (
-                          <>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">domain:</span>
-                              <span className="terminal-text">energy</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">interface:</span>
-                              <span className="terminal-text">swing</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">analytics:</span>
-                              <span className="terminal-text">real-time</span>
-                            </div>
-                          </>
-                        )}
-                        {index === 3 && (
-                          <>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">type:</span>
-                              <span className="terminal-text">business</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">framework:</span>
-                              <span className="terminal-text">react</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">design:</span>
-                              <span className="terminal-text">responsive</span>
-                            </div>
-                          </>
-                        )}
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Status:</span>
+                        <span className="terminal-text">{project.status.toLowerCase()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Stack:</span>
+                        <span className="terminal-text">{project.tech.length} technologies</span>
                       </div>
                     </div>
                   </div>
@@ -255,39 +253,26 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* GitHub Section */}
+        {/* GitHub CTA */}
         <div className="mt-16 text-center">
           <div className="code-block max-w-4xl mx-auto">
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <BarChart3 className="h-8 w-8 text-primary" />
-              <h3 className="text-2xl font-semibold terminal-text">
-                explore complete portfolio
-              </h3>
-            </div>
             <div className="flex items-center space-x-2 mb-4 justify-center">
               <span className="text-secondary">{'>'}</span>
               <span className="text-primary">git remote -v</span>
             </div>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Visit my GitHub profile for additional projects, open source contributions, 
-              and ongoing development work.
+            <p className="text-muted-foreground mb-6">
+              Explore my complete portfolio on GitHub for more projects, contributions, and ongoing development work.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://github.com/Bhavin-0"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-3 bg-primary/10 border border-primary rounded-lg px-8 py-4 hover:bg-primary/20 transition-all duration-300 card-hover cyber-glow terminal-text"
-              >
-                <Github className="h-6 w-6" />
-                <span className="font-medium">github.com/Bhavin-0</span>
-                <ExternalLink className="h-4 w-4" />
-              </a>
-              <div className="inline-flex items-center space-x-3 bg-secondary/10 border border-secondary/30 rounded-lg px-8 py-4 terminal-text">
-                <Code className="h-6 w-6 text-secondary" />
-                <span className="font-medium">20+ repositories</span>
-              </div>
-            </div>
+            <a
+              href="https://github.com/Bhavin-0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-primary/10 border border-primary rounded-lg px-8 py-4 hover:bg-primary/20 transition-all duration-300 card-hover cyber-glow terminal-text"
+            >
+              <Github className="h-6 w-6" />
+              <span className="font-medium">github.com/Bhavin-0</span>
+              <ExternalLink className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </div>

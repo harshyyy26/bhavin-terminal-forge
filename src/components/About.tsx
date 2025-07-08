@@ -67,22 +67,23 @@ const About = () => {
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-secondary">{'>'}</span>
-                <span className="text-primary">cat background.txt</span>
+                <span className="text-primary">cat introduction.txt</span>
               </div>
               <div className="text-muted-foreground leading-relaxed space-y-4">
                 <p>
-                  Computer Engineering student at MIT Academy of Engineering (AOE), Pune. 
-                  Passionate about backend systems, enterprise software development, and building 
-                  scalable solutions that solve real-world problems.
+                  Hi, I'm <span className="text-primary font-semibold">Bhavin Joshi</span> – a passionate Java & Full-Stack Developer 
+                  who loves building robust, scalable backend systems. I'm currently pursuing my B.Tech in Computer Engineering 
+                  at MIT Academy of Engineering, Pune.
                 </p>
                 <p>
-                  Specialized in Java development with hands-on experience in Spring Boot, 
-                  database management, and full-stack web technologies. Built enterprise-level 
-                  software including safety management systems for industrial applications.
+                  I specialize in Java development with hands-on experience in Spring Boot, database management, 
+                  and full-stack web technologies. My passion lies in creating enterprise-level software that 
+                  solves real-world problems, from safety management systems to productivity tools.
                 </p>
                 <p>
-                  Committed to writing clean, efficient code and continuously learning new 
-                  technologies to stay ahead in the rapidly evolving tech landscape.
+                  I enjoy learning new technologies like Spring Boot and MongoDB, and have developed multiple 
+                  real-world projects focused on productivity and security. I'm constantly improving through 
+                  GitHub-based learning and contributing to open-source projects.
                 </p>
               </div>
             </div>
@@ -90,7 +91,7 @@ const About = () => {
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-secondary">{'>'}</span>
-                <span className="text-primary">ls -la interests/</span>
+                <span className="text-primary">ls -la core_interests/</span>
               </div>
               <div className="space-y-3">
                 {[
@@ -99,6 +100,7 @@ const About = () => {
                   'Database Design & Optimization (MySQL, MongoDB)',
                   'RESTful API Development & Microservices',
                   'Full-Stack Web Development with React',
+                  'Security-focused Application Development',
                   'Open Source Contributions & Collaborative Development'
                 ].map((interest, index) => (
                   <div key={index} className="flex items-center space-x-3 text-muted-foreground">
@@ -106,6 +108,20 @@ const About = () => {
                     <span>{interest}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="code-block">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-secondary">{'>'}</span>
+                <span className="text-primary">cat philosophy.md</span>
+              </div>
+              <div className="text-muted-foreground leading-relaxed">
+                <p>
+                  "I believe in writing clean, maintainable code that not only works but is also easy to understand 
+                  and extend. My approach focuses on building scalable solutions that grow with business requirements 
+                  while maintaining security and performance standards."
+                </p>
               </div>
             </div>
           </div>
@@ -121,19 +137,19 @@ const About = () => {
               
               <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
                 <Code className="h-8 w-8 text-secondary mx-auto mb-4" />
-                <div className="text-3xl font-bold terminal-text">5+</div>
+                <div className="text-3xl font-bold terminal-text">8+</div>
                 <div className="text-sm text-muted-foreground">Projects Completed</div>
               </div>
               
               <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
                 <Database className="h-8 w-8 text-primary mx-auto mb-4" />
-                <div className="text-3xl font-bold terminal-text">3+</div>
+                <div className="text-3xl font-bold terminal-text">4+</div>
                 <div className="text-sm text-muted-foreground">Database Technologies</div>
               </div>
               
               <div className="bg-card border border-border rounded-lg p-6 text-center card-hover cyber-glow">
                 <Server className="h-8 w-8 text-secondary mx-auto mb-4" />
-                <div className="text-3xl font-bold terminal-text">8+</div>
+                <div className="text-3xl font-bold terminal-text">10+</div>
                 <div className="text-sm text-muted-foreground">Tech Stack Mastery</div>
               </div>
             </div>
@@ -160,20 +176,27 @@ const About = () => {
                 </div>
                 <div className="pl-4">
                   <span className="text-primary">"location"</span>: 
-                  <span className="text-foreground"> "Pune, Maharashtra"</span>
+                  <span className="text-foreground"> "Pune, Maharashtra"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className="text-primary">"focus"</span>: 
+                  <span className="text-foreground"> "Backend Development & System Design"</span>
                 </div>
                 <div><span className="text-secondary">{`}`}</span></div>
               </div>
             </div>
 
-            {/* Status */}
+            {/* Current Focus */}
             <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
-                <span className="font-medium text-primary terminal-text">SYSTEM STATUS</span>
+                <span className="font-medium text-primary terminal-text">CURRENT FOCUS</span>
               </div>
-              <div className="text-sm text-muted-foreground">
-                Available for internship opportunities and collaborative projects
+              <div className="text-sm text-muted-foreground space-y-1">
+                <div>• Advanced Spring Boot & Microservices</div>
+                <div>• Cloud Technologies (AWS/Azure)</div>
+                <div>• System Design & Architecture</div>
+                <div>• Open Source Contributions</div>
               </div>
             </div>
           </div>
