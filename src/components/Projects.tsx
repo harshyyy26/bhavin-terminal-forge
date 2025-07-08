@@ -85,7 +85,7 @@ const Projects = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
           <div className="code-block max-w-3xl mx-auto">
             <div className="flex items-center space-x-2 mb-2">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">find ./projects -type f -name "*.md" | head -4</span>
             </div>
             <p className="text-muted-foreground">
@@ -135,7 +135,7 @@ const Projects = () => {
                       {project.featured && (
                         <div className="code-block mb-6">
                           <div className="flex items-center space-x-2 mb-3">
-                            <span className="text-secondary">></span>
+                            <span className="text-secondary">{'>'}</span>
                             <span className="text-primary">cat features.txt</span>
                           </div>
                           <div className="text-sm text-muted-foreground">
@@ -178,7 +178,7 @@ const Projects = () => {
                   <div className="space-y-4">
                     <div className="code-block">
                       <div className="flex items-center space-x-2 mb-4">
-                        <span className="text-secondary">></span>
+                        <span className="text-secondary">{'>'}</span>
                         <span className="text-primary">./project_info.sh</span>
                       </div>
                       <div className="space-y-3 text-sm">
@@ -265,7 +265,7 @@ const Projects = () => {
               </h3>
             </div>
             <div className="flex items-center space-x-2 mb-4 justify-center">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">git remote -v</span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">

@@ -89,7 +89,7 @@ const Contact = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
           <div className="code-block max-w-2xl mx-auto">
             <div className="flex items-center space-x-2 mb-2">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">ping -c 1 bhavin.dev</span>
             </div>
             <p className="text-muted-foreground">
@@ -103,7 +103,7 @@ const Contact = () => {
           <div ref={infoRef} className="space-y-6">
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-6">
-                <span className="text-secondary">></span>
+                <span className="text-secondary">{'>'}</span>
                 <span className="text-primary">cat contact_info.json</span>
               </div>
               
@@ -154,7 +154,7 @@ const Contact = () => {
 
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-secondary">></span>
+                <span className="text-secondary">{'>'}</span>
                 <span className="text-primary">systemctl status availability</span>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
@@ -172,7 +172,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div ref={formRef} className="code-block">
             <div className="flex items-center space-x-2 mb-6">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">nano message.txt</span>
             </div>
             
@@ -231,7 +231,7 @@ const Contact = () => {
         <div className="mt-16 text-center">
           <div className="code-block max-w-2xl mx-auto">
             <div className="flex items-center space-x-2 mb-4 justify-center">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">whoami && date</span>
             </div>
             <p className="text-muted-foreground mb-2">

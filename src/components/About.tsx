@@ -66,7 +66,7 @@ const About = () => {
           <div ref={contentRef} className="space-y-6">
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-secondary">></span>
+                <span className="text-secondary">{'>'}</span>
                 <span className="text-primary">cat background.txt</span>
               </div>
               <div className="text-muted-foreground leading-relaxed space-y-4">
@@ -89,7 +89,7 @@ const About = () => {
 
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-secondary">></span>
+                <span className="text-secondary">{'>'}</span>
                 <span className="text-primary">ls -la interests/</span>
               </div>
               <div className="space-y-3">
@@ -141,7 +141,7 @@ const About = () => {
             {/* Education */}
             <div className="code-block">
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-secondary">></span>
+                <span className="text-secondary">{'>'}</span>
                 <span className="text-primary">cat education.json</span>
               </div>
               <div className="space-y-2 text-sm">

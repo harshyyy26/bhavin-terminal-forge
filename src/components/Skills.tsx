@@ -105,7 +105,7 @@ const Skills = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
           <div className="code-block max-w-2xl mx-auto">
             <div className="flex items-center space-x-2 mb-2">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">grep -r "expertise" ./tech_stack/</span>
             </div>
             <p className="text-muted-foreground">
@@ -140,7 +140,7 @@ const Skills = () => {
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div className="code-block">
             <div className="flex items-center space-x-2 mb-6">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">./assess_proficiency.sh</span>
             </div>
             <div className="space-y-4">
@@ -171,7 +171,7 @@ const Skills = () => {
 
           <div className="code-block">
             <div className="flex items-center space-x-2 mb-6">
-              <span className="text-secondary">></span>
+              <span className="text-secondary">{'>'}</span>
               <span className="text-primary">tail -f learning.log</span>
             </div>
             <div className="space-y-3">
@@ -195,7 +195,7 @@ const Skills = () => {
         {/* Development Philosophy */}
         <div className="code-block">
           <div className="flex items-center space-x-2 mb-6">
-            <span className="text-secondary">></span>
+            <span className="text-secondary">{'>'}</span>
             <span className="text-primary">cat philosophy.md</span>
           </div>
           <div className="grid md:grid-cols-3 gap-6 text-center">
