@@ -80,7 +80,7 @@ const Hero = () => {
           {/* Intro line */}
           <div ref={introRef} className="space-y-4">
             <div className="text-lg text-muted-foreground flex items-center justify-center space-x-2">
-              <span className="text-primary">></span>
+              <span className="text-primary">{'>'}</span>
               <span>Crafting scalable software solutions with passion and precision</span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
