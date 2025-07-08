@@ -1,153 +1,111 @@
 
-import React from 'react';
-import { Github, ExternalLink, Code, Database, Shield, Zap, Building, Wrench } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Github, ExternalLink, Shield, Code, Zap, Building } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+
   const projects = [
     {
       title: "Coal Mine Safety & Productivity Management",
       description: "Comprehensive enterprise software for coal mining operations, featuring safety monitoring, productivity tracking, and real-time analytics dashboard.",
-      tech: ["Java", "Spring Boot", "MySQL", "REST APIs", "Dashboard"],
+      tech: ["Java", "Spring Boot", "MySQL", "REST APIs"],
       icon: <Shield className="h-6 w-6" />,
-      color: "green",
-      features: [
-        "Safety incident tracking and reporting",
-        "Productivity metrics and analytics",
-        "Real-time monitoring dashboard",
-        "Multi-user role management"
-      ]
+      color: "primary",
+      featured: true
     },
     {
       title: "Passure - Password Manager",
-      description: "Secure Java-based password management application with encryption, secure storage, and intuitive user interface for managing credentials.",
-      tech: ["Java", "Encryption", "Swing", "File I/O", "Security"],
+      description: "Secure Java-based password management application with encryption, secure storage, and intuitive user interface.",
+      tech: ["Java", "Encryption", "Swing", "Security"],
       icon: <Code className="h-6 w-6" />,
-      color: "cyan",
-      features: [
-        "AES encryption for password security",
-        "Master password protection",
-        "Password generation utility",
-        "Secure local storage"
-      ]
+      color: "secondary"
     },
     {
       title: "WattTrack - Electricity Tracker",
       description: "Java Swing application for monitoring and tracking electricity consumption with usage analytics and billing calculations.",
-      tech: ["Java Swing", "File Management", "Analytics", "GUI"],
+      tech: ["Java Swing", "Analytics", "GUI"],
       icon: <Zap className="h-6 w-6" />,
-      color: "green",
-      features: [
-        "Real-time consumption monitoring",
-        "Monthly usage reports",
-        "Cost calculation and forecasting",
-        "Interactive charts and graphs"
-      ]
+      color: "primary"
     },
     {
       title: "Rukmini Enterprises Website",
       description: "Professional business website with modern design, responsive layout, and comprehensive business information presentation.",
-      tech: ["React", "JavaScript", "CSS", "Responsive Design"],
+      tech: ["React", "JavaScript", "CSS", "Responsive"],
       icon: <Building className="h-6 w-6" />,
-      color: "cyan",
-      features: [
-        "Responsive design for all devices",
-        "Professional business showcase",
-        "Contact forms and integration",
-        "SEO optimized structure"
-      ]
+      color: "secondary"
     }
   ];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const projectsGrid = projectsRef.current;
+
+    if (section && projectsGrid) {
+      // Animate project cards with stagger
+      gsap.from(projectsGrid.children, {
+        opacity: 0,
+        y: 80,
+        scale: 0.8,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+  }, []);
+
   return (
-    <section id="projects" className="py-20 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="projects" className="section-padding bg-card/30">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            <span className="text-green-500 font-mono">03.</span> Featured Projects
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="gradient-text">03.</span> Featured Projects
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-cyan-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             A showcase of my development journey, from enterprise software to personal utilities
           </p>
         </div>
 
-        {/* Terminal-style project list */}
-        <div className="terminal-window max-w-4xl mx-auto mb-12 animate-fade-in-up">
-          <div className="terminal-header">
-            <div className="terminal-dot bg-red-500"></div>
-            <div className="terminal-dot bg-yellow-500"></div>
-            <div className="terminal-dot bg-green-500"></div>
-            <span className="text-gray-400 ml-4 font-mono text-sm">projects --show-all</span>
-          </div>
-          
-          <div className="terminal-content">
-            <div className="space-y-3">
-              <div>
-                <span className="text-green-500">$</span>
-                <span className="text-gray-400 ml-2">ls -la ~/projects/</span>
-              </div>
-              
-              <div className="ml-4 space-y-2 text-sm font-mono">
-                {projects.map((project, index) => (
-                  <div key={project.title} className="flex items-center space-x-3 text-gray-300">
-                    <span className="text-cyan-400">drwxr-xr-x</span>
-                    <span className="text-green-500">2</span>
-                    <span className="text-yellow-400">bhavin</span>
-                    <span className="text-yellow-400">bhavin</span>
-                    <span className="text-gray-400">4096</span>
-                    <span className="text-gray-400">Dec {index + 1}</span>
-                    <span className="text-white">{project.title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')}/</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Projects grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div ref={projectsRef} className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="project-card group"
-              style={{ animationDelay: `${index * 200}ms` }}
+              className={`bg-card rounded-xl p-8 border border-border card-hover ${
+                project.featured ? 'lg:col-span-2' : ''
+              }`}
             >
               <div className="flex items-center space-x-3 mb-4">
-                <div className={`text-${project.color}-500`}>
+                <div className={`text-${project.color}`}>
                   {project.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
-                  {project.title}
-                </h3>
+                <h3 className="text-xl font-bold">{project.title}</h3>
               </div>
 
-              <p className="text-gray-300 mb-6 leading-relaxed">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 {project.description}
               </p>
 
-              <div className="mb-6">
-                <h4 className="text-sm font-mono text-green-500 mb-3">Key Features:</h4>
-                <ul className="space-y-2">
-                  {project.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center space-x-2 text-sm text-gray-400">
-                      <span className="text-green-500">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mb-6">
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="skill-tag text-xs"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="skill-badge text-xs"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
               <div className="flex space-x-4">
@@ -155,52 +113,39 @@ const Projects = () => {
                   href="https://github.com/Bhavin-0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2 bg-green-500/10 border border-green-500/30 rounded px-3 py-2 text-sm font-mono hover:bg-green-500/20 hover:border-green-500 transition-all duration-300"
+                  className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
                 >
                   <Github className="h-4 w-4" />
-                  <span>Code</span>
+                  <span>View Code</span>
                 </a>
-                <button className="flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded px-3 py-2 text-sm font-mono hover:bg-cyan-500/20 hover:border-cyan-500 transition-all duration-300">
+                <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-4 py-2 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300">
                   <ExternalLink className="h-4 w-4" />
-                  <span>Demo</span>
+                  <span>Live Demo</span>
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* GitHub integration section */}
-        <div className="mt-16 terminal-window">
-          <div className="terminal-header">
-            <div className="terminal-dot bg-red-500"></div>
-            <div className="terminal-dot bg-yellow-500"></div>
-            <div className="terminal-dot bg-green-500"></div>
-            <span className="text-gray-400 ml-4 font-mono text-sm">github_activity.sh</span>
-          </div>
-          
-          <div className="terminal-content text-center">
-            <div className="space-y-4">
-              <div>
-                <span className="text-green-500">$</span>
-                <span className="text-gray-400 ml-2">git log --author="Bhavin-0" --oneline</span>
-              </div>
-              
-              <div className="inline-block">
-                <a
-                  href="https://github.com/Bhavin-0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-3 bg-green-500/10 border border-green-500/30 rounded-lg px-6 py-4 hover:bg-green-500/20 hover:border-green-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,197,94,0.3)]"
-                >
-                  <Github className="h-8 w-8" />
-                  <div className="text-left">
-                    <div className="text-white font-bold">View All Projects</div>
-                    <div className="text-gray-400 text-sm font-mono">github.com/Bhavin-0</div>
-                  </div>
-                  <ExternalLink className="h-5 w-5" />
-                </a>
-              </div>
-            </div>
+        {/* GitHub Section */}
+        <div className="mt-16 text-center">
+          <div className="bg-card rounded-xl p-8 border border-border">
+            <h3 className="text-2xl font-semibold mb-4 gradient-text">
+              More Projects on GitHub
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Explore my complete portfolio of projects and contributions
+            </p>
+            <a
+              href="https://github.com/Bhavin-0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-primary/10 border border-primary rounded-lg px-8 py-4 hover:bg-primary/20 transition-all duration-300 card-hover"
+            >
+              <Github className="h-6 w-6" />
+              <span className="font-medium">Visit My GitHub</span>
+              <ExternalLink className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </div>

@@ -1,126 +1,126 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GraduationCap, Code, Database, Server } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    const stats = statsRef.current;
+
+    if (section && content && stats) {
+      // Animate content on scroll
+      gsap.from(content.children, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate stats
+      gsap.from(stats.children, {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: stats,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+  }, []);
+
   return (
-    <section id="about" className="py-20 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="about" className="section-padding bg-card/30">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            <span className="text-green-500 font-mono">01.</span> About Me
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="gradient-text">01.</span> About Me
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-cyan-500 mx-auto"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Terminal-style info */}
-          <div className="terminal-window animate-slide-in-left">
-            <div className="terminal-header">
-              <div className="terminal-dot bg-red-500"></div>
-              <div className="terminal-dot bg-yellow-500"></div>
-              <div className="terminal-dot bg-green-500"></div>
-              <span className="text-gray-400 ml-4 font-mono text-sm">about.sh</span>
+          {/* Content */}
+          <div ref={contentRef} className="space-y-6">
+            <div className="bg-card rounded-xl p-8 border border-border">
+              <h3 className="text-2xl font-semibold mb-4 text-primary">Background</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                I'm a passionate Computer Engineering student at MIT AOE Pune, currently in my final year 
+                (2022-2026). My journey in software development focuses on backend systems and scalable 
+                applications using Java and modern web technologies.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                I believe in writing clean, efficient code and building solutions that make a real impact. 
+                My experience spans from enterprise software development to personal utility applications.
+              </p>
             </div>
-            
-            <div className="terminal-content">
-              <div className="space-y-4">
-                <div>
-                  <span className="text-green-500">$</span>
-                  <span className="text-gray-400 ml-2">cat personal_info.json</span>
-                </div>
-                
-                <div className="ml-4 space-y-2 text-sm">
-                  <div><span className="text-cyan-400">"name":</span> <span className="text-yellow-400">"Bhavin Lalit Joshi"</span>,</div>
-                  <div><span className="text-cyan-400">"education":</span> <span className="text-yellow-400">"B.Tech Computer Engineering"</span>,</div>
-                  <div><span className="text-cyan-400">"college":</span> <span className="text-yellow-400">"MIT AOE Pune"</span>,</div>
-                  <div><span className="text-cyan-400">"year":</span> <span className="text-yellow-400">"2022-2026"</span>,</div>
-                  <div><span className="text-cyan-400">"status":</span> <span className="text-yellow-400">"Active"</span></div>
-                </div>
 
-                <div className="mt-6">
-                  <span className="text-green-500">$</span>
-                  <span className="text-gray-400 ml-2">echo $PASSION</span>
-                </div>
-                
-                <div className="ml-4 text-gray-300 text-sm leading-relaxed">
-                  I'm passionate about backend systems and scalable software development. 
-                  Currently pursuing my B.Tech in Computer Engineering at MIT AOE Pune, 
-                  I focus on building robust applications using Java and modern web technologies.
-                </div>
-
-                <div className="mt-6">
-                  <span className="text-green-500">$</span>
-                  <span className="text-gray-400 ml-2">ls interests/</span>
-                </div>
-                
-                <div className="ml-4 space-y-1 text-sm text-gray-300">
-                  <div>• Backend Development & System Design</div>
-                  <div>• Full-Stack Web Applications</div>
-                  <div>• Database Optimization</div>
-                  <div>• API Development & Integration</div>
-                  <div>• Open Source Contribution</div>
-                </div>
-              </div>
+            <div className="bg-card rounded-xl p-8 border border-border">
+              <h3 className="text-2xl font-semibold mb-4 text-primary">Interests</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center space-x-2">
+                  <span className="text-primary">•</span>
+                  <span>Backend Development & System Design</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-primary">•</span>
+                  <span>Full-Stack Web Applications</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-primary">•</span>
+                  <span>Database Optimization</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <span className="text-primary">•</span>
+                  <span>API Development & Integration</span>
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* Stats and highlights */}
-          <div className="space-y-6 animate-slide-in-right">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="project-card text-center">
-                <GraduationCap className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">2026</div>
-                <div className="text-sm text-gray-400">Graduation</div>
-              </div>
-              
-              <div className="project-card text-center">
-                <Code className="h-8 w-8 text-cyan-500 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">5+</div>
-                <div className="text-sm text-gray-400">Projects</div>
-              </div>
-              
-              <div className="project-card text-center">
-                <Database className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">2+</div>
-                <div className="text-sm text-gray-400">Databases</div>
-              </div>
-              
-              <div className="project-card text-center">
-                <Server className="h-8 w-8 text-cyan-500 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">3+</div>
-                <div className="text-sm text-gray-400">Frameworks</div>
-              </div>
+          {/* Stats */}
+          <div ref={statsRef} className="grid grid-cols-2 gap-6">
+            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
+              <GraduationCap className="h-8 w-8 text-primary mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">2026</div>
+              <div className="text-sm text-muted-foreground">Expected Graduation</div>
             </div>
-
-            <div className="terminal-window">
-              <div className="terminal-header">
-                <div className="terminal-dot bg-red-500"></div>
-                <div className="terminal-dot bg-yellow-500"></div>
-                <div className="terminal-dot bg-green-500"></div>
-                <span className="text-gray-400 ml-4 font-mono text-sm">achievements.log</span>
-              </div>
-              
-              <div className="terminal-content">
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-500">✓</span>
-                    <span className="text-gray-300">Developed production-ready applications</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-500">✓</span>
-                    <span className="text-gray-300">Experience with enterprise software development</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-500">✓</span>
-                    <span className="text-gray-300">Proficient in full-stack development</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-500">✓</span>
-                    <span className="text-gray-300">Strong foundation in computer engineering</span>
-                  </div>
-                </div>
-              </div>
+            
+            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
+              <Code className="h-8 w-8 text-secondary mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">5+</div>
+              <div className="text-sm text-muted-foreground">Projects Completed</div>
+            </div>
+            
+            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
+              <Database className="h-8 w-8 text-primary mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">3+</div>
+              <div className="text-sm text-muted-foreground">Database Technologies</div>
+            </div>
+            
+            <div className="bg-card rounded-xl p-6 text-center border border-border card-hover">
+              <Server className="h-8 w-8 text-secondary mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">4+</div>
+              <div className="text-sm text-muted-foreground">Frameworks & Tools</div>
             </div>
           </div>
         </div>

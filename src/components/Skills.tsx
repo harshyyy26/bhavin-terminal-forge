@@ -1,108 +1,113 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import { Code, Database, Wrench, Globe } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+
   const skillCategories = [
     {
       title: "Languages",
       icon: <Code className="h-6 w-6" />,
-      skills: ["Java", "JavaScript", "SQL", "HTML/CSS"],
-      color: "green"
+      skills: ["Java", "JavaScript", "SQL"],
+      color: "primary"
     },
     {
-      title: "Frameworks & Libraries", 
+      title: "Tech Stack", 
       icon: <Globe className="h-6 w-6" />,
-      skills: ["Spring Boot", "React", "Node.js", "JDBC", "REST APIs"],
-      color: "cyan"
+      skills: ["Spring Boot", "REST APIs", "React", "Node.js", "Firebase"],
+      color: "secondary"
     },
     {
       title: "Databases",
       icon: <Database className="h-6 w-6" />,
-      skills: ["MySQL", "MongoDB", "Firebase"],
-      color: "green"
+      skills: ["MySQL", "MongoDB"],
+      color: "primary"
     },
     {
-      title: "Tools & Technologies",
+      title: "Tools",
       icon: <Wrench className="h-6 w-6" />,
-      skills: ["Git", "GitHub", "IntelliJ IDEA", "VS Code", "Postman"],
-      color: "cyan"
+      skills: ["Git", "GitHub", "IntelliJ IDEA", "VS Code"],
+      color: "secondary"
     }
   ];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const skills = skillsRef.current;
+
+    if (section && skills) {
+      // Animate skill categories
+      gsap.from(skills.children, {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate individual skills with delay
+      skillCategories.forEach((category, categoryIndex) => {
+        const categoryElement = skills.children[categoryIndex];
+        if (categoryElement) {
+          const skillBadges = categoryElement.querySelectorAll('.skill-badge');
+          gsap.from(skillBadges, {
+            opacity: 0,
+            x: -20,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: categoryElement,
+              start: "top 90%",
+              toggleActions: "play none none reverse"
+            }
+          });
+        }
+      });
+    }
+  }, []);
+
   return (
-    <section id="skills" className="py-20 bg-muted/20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="skills" className="section-padding">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            <span className="text-green-500 font-mono">02.</span> Skills & Technologies
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="gradient-text">02.</span> Skills & Technologies
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-cyan-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             My technical arsenal for building scalable and efficient software solutions
           </p>
         </div>
 
-        {/* Terminal-style skills display */}
-        <div className="terminal-window max-w-4xl mx-auto mb-12 animate-fade-in-up">
-          <div className="terminal-header">
-            <div className="terminal-dot bg-red-500"></div>
-            <div className="terminal-dot bg-yellow-500"></div>
-            <div className="terminal-dot bg-green-500"></div>
-            <span className="text-gray-400 ml-4 font-mono text-sm">skills --list --verbose</span>
-          </div>
-          
-          <div className="terminal-content">
-            <div className="space-y-6">
-              {skillCategories.map((category, index) => (
-                <div key={category.title}>
-                  <div className="flex items-center space-x-3 mb-3">
-                    <span className="text-green-500">$</span>
-                    <span className="text-gray-400">ls</span>
-                    <span className="text-yellow-400">{category.title.toLowerCase().replace(' & ', '_').replace(' ', '_')}/</span>
-                  </div>
-                  
-                  <div className="ml-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                    {category.skills.map((skill, skillIndex) => (
-                      <div
-                        key={skill}
-                        className="skill-tag"
-                        style={{ animationDelay: `${index * 200 + skillIndex * 100}ms` }}
-                      >
-                        {skill}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Skills grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={skillsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className="project-card group"
-              style={{ animationDelay: `${index * 200}ms` }}
+              className="bg-card rounded-xl p-6 border border-border card-hover"
             >
-              <div className={`flex items-center space-x-3 mb-4 text-${category.color}-500`}>
+              <div className={`flex items-center space-x-3 mb-6 text-${category.color}`}>
                 {category.icon}
-                <h3 className="font-bold text-lg text-white">{category.title}</h3>
+                <h3 className="font-semibold text-lg">{category.title}</h3>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {category.skills.map((skill) => (
-                  <div
-                    key={skill}
-                    className="flex items-center justify-between py-2 border-b border-gray-700/30 last:border-b-0"
-                  >
-                    <span className="text-gray-300 font-mono text-sm">{skill}</span>
-                    <div className="flex space-x-1">
-                      <div className={`w-2 h-2 rounded-full bg-${category.color}-500`}></div>
-                      <div className={`w-2 h-2 rounded-full bg-${category.color}-500`}></div>
-                      <div className={`w-2 h-2 rounded-full bg-${category.color}-500`}></div>
-                    </div>
+                  <div key={skill} className="skill-badge">
+                    {skill}
                   </div>
                 ))}
               </div>
@@ -110,41 +115,23 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Skill progression animation */}
-        <div className="mt-16 terminal-window">
-          <div className="terminal-header">
-            <div className="terminal-dot bg-red-500"></div>
-            <div className="terminal-dot bg-yellow-500"></div>
-            <div className="terminal-dot bg-green-500"></div>
-            <span className="text-gray-400 ml-4 font-mono text-sm">learning_progress.sh</span>
-          </div>
-          
-          <div className="terminal-content">
-            <div className="space-y-4">
-              <div>
-                <span className="text-green-500">$</span>
-                <span className="text-gray-400 ml-2">echo "Currently learning and improving..."</span>
+        {/* Learning Section */}
+        <div className="mt-16 bg-card rounded-xl p-8 border border-border">
+          <h3 className="text-2xl font-semibold mb-6 text-center gradient-text">
+            Currently Learning
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              "Advanced Spring Boot",
+              "Microservices Architecture", 
+              "Cloud Technologies",
+              "System Design Patterns"
+            ].map((item, index) => (
+              <div key={item} className="flex items-center space-x-2 text-muted-foreground">
+                <span className="text-primary">⚡</span>
+                <span>{item}</span>
               </div>
-              
-              <div className="ml-4 space-y-3 text-sm">
-                <div className="flex items-center space-x-3">
-                  <span className="text-yellow-400">⚡</span>
-                  <span className="text-gray-300">Advanced Spring Boot concepts</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className="text-yellow-400">⚡</span>
-                  <span className="text-gray-300">Microservices architecture</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className="text-yellow-400">⚡</span>
-                  <span className="text-gray-300">Cloud technologies (AWS, Docker)</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className="text-yellow-400">⚡</span>
-                  <span className="text-gray-300">System design patterns</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
