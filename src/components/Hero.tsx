@@ -25,7 +25,7 @@ const Hero = () => {
     })
     // Animate role with typing effect
     .to(roleRef.current, {
-      text: "Java Developer | Full-Stack Engineer",
+      text: "Aspiring Java Developer | Full-Stack Enthusiast",
       duration: 2,
       ease: "none"
     }, "-=0.5")
@@ -83,9 +83,9 @@ const Hero = () => {
               <span className="text-primary">{'>'}</span>
               <span>Crafting scalable software solutions with passion and precision</span>
             </div>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Aspiring Java Developer passionate about backend systems and modern web technologies. 
-              Currently pursuing Computer Engineering at MIT AOE Pune.
+            <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
+              B.Tech. Computer Engineering student at MIT AOE Pune (2022–2026), passionate about backend systems, 
+              full-stack development, and building innovative software solutions that solve real-world problems.
             </p>
           </div>
 

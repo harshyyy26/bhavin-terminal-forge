@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Code, Database, Wrench, Globe } from 'lucide-react';
+import { Code, Database, Wrench, Globe, Terminal, Layers } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,27 +12,39 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: "Languages",
+      title: "Programming Languages",
       icon: <Code className="h-6 w-6" />,
-      skills: ["Java", "JavaScript", "SQL"],
+      skills: ["Java", "JavaScript", "SQL", "HTML5", "CSS3"],
       color: "primary"
     },
     {
-      title: "Tech Stack", 
-      icon: <Globe className="h-6 w-6" />,
-      skills: ["Spring Boot", "REST APIs", "React", "Node.js", "Firebase"],
+      title: "Backend Technologies", 
+      icon: <Terminal className="h-6 w-6" />,
+      skills: ["Spring Boot", "JDBC", "REST APIs", "Microservices", "Node.js"],
       color: "secondary"
+    },
+    {
+      title: "Frontend & Full-Stack",
+      icon: <Globe className="h-6 w-6" />,
+      skills: ["React.js", "JavaScript ES6+", "Responsive Design", "Modern CSS", "Component Architecture"],
+      color: "primary"
     },
     {
       title: "Databases",
       icon: <Database className="h-6 w-6" />,
-      skills: ["MySQL", "MongoDB"],
+      skills: ["MySQL", "MongoDB", "Firebase", "Database Design", "Query Optimization"],
+      color: "secondary"
+    },
+    {
+      title: "Development Tools",
+      icon: <Wrench className="h-6 w-6" />,
+      skills: ["Git & GitHub", "IntelliJ IDEA", "VS Code", "Eclipse", "Postman"],
       color: "primary"
     },
     {
-      title: "Tools",
-      icon: <Wrench className="h-6 w-6" />,
-      skills: ["Git", "GitHub", "IntelliJ IDEA", "VS Code"],
+      title: "Frameworks & Libraries",
+      icon: <Layers className="h-6 w-6" />,
+      skills: ["Spring Framework", "React Ecosystem", "Express.js", "Java Swing", "Bootstrap"],
       color: "secondary"
     }
   ];
@@ -88,12 +100,12 @@ const Skills = () => {
             <span className="gradient-text">02.</span> Skills & Technologies
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            My technical arsenal for building scalable and efficient software solutions
+          <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
+            My comprehensive technical arsenal for building scalable, efficient, and innovative software solutions
           </p>
         </div>
 
-        <div ref={skillsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={skillsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
@@ -115,23 +127,75 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Learning Section */}
-        <div className="mt-16 bg-card rounded-xl p-8 border border-border">
+        {/* Technical Proficiency Overview */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-card rounded-xl p-8 border border-border">
+            <h3 className="text-2xl font-semibold mb-6 gradient-text">Core Competencies</h3>
+            <div className="space-y-4">
+              {[
+                { skill: "Java Development", level: "Advanced", percent: "90%" },
+                { skill: "Spring Boot", level: "Intermediate", percent: "75%" },
+                { skill: "Database Management", level: "Advanced", percent: "85%" },
+                { skill: "React.js", level: "Intermediate", percent: "70%" },
+                { skill: "REST API Development", level: "Advanced", percent: "80%" }
+              ].map((item, index) => (
+                <div key={item.skill}>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm font-medium">{item.skill}</span>
+                    <span className="text-sm text-muted-foreground">{item.level}</span>
+                  </div>
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-primary to-secondary h-2 rounded-full transition-all duration-1000"
+                      style={{ width: item.percent }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-8 border border-border">
+            <h3 className="text-2xl font-semibold mb-6 gradient-text">Currently Learning</h3>
+            <div className="space-y-4">
+              {[
+                "Advanced Spring Boot Features",
+                "Microservices Architecture", 
+                "Cloud Technologies (AWS/Azure)",
+                "System Design Patterns",
+                "Docker & Containerization",
+                "Advanced React Patterns"
+              ].map((item, index) => (
+                <div key={item} className="flex items-center space-x-3 text-muted-foreground">
+                  <span className="text-primary text-lg">⚡</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Development Philosophy */}
+        <div className="bg-card rounded-xl p-8 border border-border">
           <h3 className="text-2xl font-semibold mb-6 text-center gradient-text">
-            Currently Learning
+            Development Philosophy
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              "Advanced Spring Boot",
-              "Microservices Architecture", 
-              "Cloud Technologies",
-              "System Design Patterns"
-            ].map((item, index) => (
-              <div key={item} className="flex items-center space-x-2 text-muted-foreground">
-                <span className="text-primary">⚡</span>
-                <span>{item}</span>
-              </div>
-            ))}
+          <div className="grid md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div className="text-3xl mb-3">🎯</div>
+              <h4 className="font-semibold mb-2">Clean Code</h4>
+              <p className="text-sm text-muted-foreground">Writing maintainable, readable, and efficient code that follows best practices</p>
+            </div>
+            <div>
+              <div className="text-3xl mb-3">🚀</div>
+              <h4 className="font-semibold mb-2">Scalable Solutions</h4>
+              <p className="text-sm text-muted-foreground">Building applications that can grow and adapt to changing requirements</p>
+            </div>
+            <div>
+              <div className="text-3xl mb-3">🔄</div>
+              <h4 className="font-semibold mb-2">Continuous Learning</h4>
+              <p className="text-sm text-muted-foreground">Staying updated with latest technologies and industry best practices</p>
+            </div>
           </div>
         </div>
       </div>
