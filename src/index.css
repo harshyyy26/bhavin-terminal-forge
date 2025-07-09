@@ -55,6 +55,13 @@
   }
 }
 
+/* Oswald font utility class */
+.oswald {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 /* Enhanced Terminal/Cyber effects */
 .terminal-bg {
   background: 

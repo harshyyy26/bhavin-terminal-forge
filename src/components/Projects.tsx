@@ -10,6 +10,8 @@ const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
 
+  console.log('Projects component rendering');
+
   const projects = [
     {
       id: 1,
@@ -93,27 +95,45 @@ const Projects = () => {
     }
   ];
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const projectsGrid = projectsRef.current;
+  console.log('Projects array:', projects);
 
-    if (section && projectsGrid) {
-      gsap.from(projectsGrid.children, {
-        opacity: 0,
-        y: 80,
-        scale: 0.9,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      });
+  useEffect(() => {
+    console.log('Projects useEffect running');
+    
+    try {
+      const section = sectionRef.current;
+      const projectsGrid = projectsRef.current;
+
+      console.log('Project refs:', { section, projectsGrid });
+
+      if (section && projectsGrid) {
+        console.log('Setting up project animations, children count:', projectsGrid.children.length);
+        
+        gsap.from(projectsGrid.children, {
+          opacity: 0,
+          y: 80,
+          scale: 0.9,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        });
+        
+        console.log('Project animations set up successfully');
+      } else {
+        console.log('Project refs not found');
+      }
+    } catch (error) {
+      console.error('Error in Projects useEffect:', error);
     }
   }, []);
+
+  console.log('About to render Projects JSX');
 
   return (
     <section ref={sectionRef} id="projects" className="section-padding terminal-bg">
@@ -138,119 +158,123 @@ const Projects = () => {
         </div>
 
         <div ref={projectsRef} className="space-y-12">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className="project-card group"
-            >
-              <div className="grid lg:grid-cols-12 gap-8 items-start">
-                {/* Project Header */}
-                <div className="lg:col-span-12 mb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg border border-${project.color}/20`}>
-                        {project.icon}
-                      </div>
-                      <div>
-                        <div className="flex items-center space-x-3 mb-2">
-                          <span className="text-xs text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
-                            {project.category}
-                          </span>
-                          <span className={`text-xs font-mono px-2 py-1 rounded ${
-                            project.status.includes('Production') || project.status.includes('Live') 
-                              ? 'bg-primary/20 text-primary border border-primary/30' 
-                              : 'bg-secondary/20 text-secondary border border-secondary/30'
-                          }`}>
-                            {project.status}
-                          </span>
+          {projects.map((project, index) => {
+            console.log('Rendering project:', project.title);
+            return (
+              <div
+                key={project.id}
+                className="bg-card border border-border rounded-lg p-6 hover:shadow-xl transition-all duration-300 hover:border-primary/50"
+                style={{ minHeight: '200px' }} // Ensure cards have minimum height
+              >
+                <div className="grid lg:grid-cols-12 gap-8 items-start">
+                  {/* Project Header */}
+                  <div className="lg:col-span-12 mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4">
+                        <div className={`text-${project.color} bg-${project.color}/10 p-3 rounded-lg border border-${project.color}/20`}>
+                          {project.icon}
                         </div>
-                        <h3 className="text-2xl font-bold terminal-text group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Project Info */}
-                <div className="lg:col-span-8 space-y-6">
-                  <div>
-                    <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                    
-                    <div className="code-block">
-                      <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-secondary">{'>'}</span>
-                        <span className="text-primary">cat features.txt</span>
-                      </div>
-                      <div className="space-y-2">
-                        {project.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center space-x-3 text-sm text-muted-foreground">
-                            <span className="text-primary">•</span>
-                            <span>{feature}</span>
+                        <div>
+                          <div className="flex items-center space-x-3 mb-2">
+                            <span className="text-xs text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
+                              {project.category}
+                            </span>
+                            <span className={`text-xs font-mono px-2 py-1 rounded ${
+                              project.status.includes('Production') || project.status.includes('Live') 
+                                ? 'bg-primary/20 text-primary border border-primary/30' 
+                                : 'bg-secondary/20 text-secondary border border-secondary/30'
+                            }`}>
+                              {project.status}
+                            </span>
                           </div>
-                        ))}
+                          <h3 className="text-2xl font-bold terminal-text group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="skill-badge text-xs terminal-text"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Project Actions */}
-                <div className="lg:col-span-4 space-y-4">
-                  <div className="code-block">
-                    <div className="flex items-center space-x-2 mb-4">
-                      <span className="text-secondary">{'>'}</span>
-                      <span className="text-primary">./deploy.sh</span>
-                    </div>
-                    <div className="space-y-3">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cyber-glow w-full"
-                      >
-                        <Github className="h-4 w-4" />
-                        <span>View Source</span>
-                      </a>
-                      <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300 w-full">
-                        <Play className="h-4 w-4" />
-                        <span>Live Demo</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="bg-muted/50 border border-border rounded-lg p-4">
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Type:</span>
-                        <span className="terminal-text">{project.category.toLowerCase()}</span>
+                  {/* Project Info */}
+                  <div className="lg:col-span-8 space-y-6">
+                    <div>
+                      <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                        {project.description}
+                      </p>
+                      
+                      <div className="code-block">
+                        <div className="flex items-center space-x-2 mb-3">
+                          <span className="text-secondary">{'>'}</span>
+                          <span className="text-primary">cat features.txt</span>
+                        </div>
+                        <div className="space-y-2">
+                          {project.features.map((feature, idx) => (
+                            <div key={idx} className="flex items-center space-x-3 text-sm text-muted-foreground">
+                              <span className="text-primary">•</span>
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Status:</span>
-                        <span className="terminal-text">{project.status.toLowerCase()}</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="bg-muted/60 border border-primary/30 rounded-lg px-4 py-2 text-sm font-medium hover:border-primary/60 transition-all duration-300 hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/20 hover:scale-105 terminal-text"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Project Actions */}
+                  <div className="lg:col-span-4 space-y-4">
+                    <div className="code-block">
+                      <div className="flex items-center space-x-2 mb-4">
+                        <span className="text-secondary">{'>'}</span>
+                        <span className="text-primary">./deploy.sh</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Stack:</span>
-                        <span className="terminal-text">{project.tech.length} technologies</span>
+                      <div className="space-y-3">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cyber-glow w-full"
+                        >
+                          <Github className="h-4 w-4" />
+                          <span>View Source</span>
+                        </a>
+                        <button className="flex items-center space-x-2 bg-secondary/10 border border-secondary/30 rounded-lg px-4 py-3 text-sm font-medium hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300 w-full">
+                          <Play className="h-4 w-4" />
+                          <span>Live Demo</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="bg-muted/50 border border-border rounded-lg p-4">
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Type:</span>
+                          <span className="terminal-text">{project.category.toLowerCase()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Status:</span>
+                          <span className="terminal-text">{project.status.toLowerCase()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Stack:</span>
+                          <span className="terminal-text">{project.tech.length} technologies</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* GitHub CTA */}
