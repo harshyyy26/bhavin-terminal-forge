@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Code, Database, Wrench, Globe, Terminal, Layers, Cpu, Zap } from 'lucide-react';
+import { Code, Database, Wrench, Globe, Terminal, Layers, Cpu, Zap, Target } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
