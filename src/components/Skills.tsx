@@ -11,6 +11,8 @@ const Skills = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
   const commandRef = useRef<HTMLDivElement>(null);
 
+  console.log('Skills component rendering');
+
   const techStack = [
     { name: 'Java', level: 95, category: 'Backend' },
     { name: 'Spring Boot', level: 90, category: 'Framework' },
@@ -25,40 +27,54 @@ const Skills = () => {
   ];
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const skills = skillsRef.current;
-    const command = commandRef.current;
+    console.log('Skills useEffect running');
+    
+    try {
+      const section = sectionRef.current;
+      const skills = skillsRef.current;
+      const command = commandRef.current;
 
-    if (section && skills && command) {
-      // Animate command terminal
-      gsap.from(command.children, {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      });
+      if (section && skills && command) {
+        console.log('All refs found, starting animations');
+        
+        // Animate command terminal
+        gsap.from(command.children, {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        });
 
-      // Animate skill badges
-      gsap.from(skills.children, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: skills,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      });
+        // Animate skill badges
+        gsap.from(skills.children, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: skills,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        });
+        
+        console.log('Animations set up successfully');
+      } else {
+        console.log('Some refs not found:', { section, skills, command });
+      }
+    } catch (error) {
+      console.error('Error in Skills useEffect:', error);
     }
   }, []);
+
+  console.log('About to render Skills JSX');
 
   return (
     <section ref={sectionRef} id="skills" className="section-padding">
